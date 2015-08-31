@@ -1,0 +1,14 @@
+class Doctor
+  ["rhinoplasty", "checkup", "interpretive_dance"].each do |action|
+	  define_method("perform_#{action}") do |argument|
+			"performing #{action.gsub('_', ' ')} on #{argument}"
+  	end
+  end
+end
+
+if __FILE__ == $0
+	doctor = Doctor.new
+	puts doctor.perform_rhinoplasty("nose")
+	puts doctor.perform_checkup("throat")
+	puts doctor.perform_interpretive_dance("in da club")
+end

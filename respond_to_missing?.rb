@@ -25,3 +25,34 @@ if __FILE__ == $0
   puts order.respond_to?(:user_name)  # Prints true
   puts order.method(:user_name)       # Prints #<Method: Order#user_name>
 end
+
+
+# Another Example
+=begin
+
+class Foo
+  def method_missing name, *args
+    p args
+  end
+
+  def respond_to? name, include_private = false
+    true
+  end
+end
+
+f = Foo.new
+f.bar               #=> []
+f.respond_to? :bar  #=> true
+f.method :bar       # NameError: undefined method `bar' for class `Foo'
+
+class Foo
+  def respond_to? *args; super; end  # “Reverting” previous redefinition
+
+  def respond_to_missing? *args
+    true
+  end
+end
+
+f.method :bar  #=> #<Method: Foo#bar>
+
+=end
